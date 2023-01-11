@@ -63,31 +63,37 @@
                     <button>Search</button>
                 </div>
             </div>
-            <div v-if="!events && !loadError" class="cards-container row">
-                <div class="loader-container">
-                    <img class="loader-img"src="./assets/img/logo.svg" alt="loader"/>
-                    <img class="loader"src="./assets/img/loader.gif" alt="loader"/>    
-                </div>
-            </div>
-            <div v-else-if="loadError" class="cards-container row">
-                <div class="not-found-container">
-                    <h2 class="not-found">Unexistent event!</h2>
-                    <h3 class="not-found">Try again with another name or category!</h3>
-                </div>
-            </div>
-            <div v-else class="cards-container row">
-                <article v-for="event of filteredEvents" class="card col-10 col-md-5 col-lg-3">
-                    <img class="card-img-top" :src="event.image" :alt="event.name">
-                    <div class="card-body">
-                        <h5 class="card-title">{{event.name}}</h5>
-                        <p class="card-text">{{event.description}}</p>
-                        <div class="card_call">
-                            <p><span>Price: $</span> {{event.price}}</p>
-                            <a class="btn btn-see-more" :href="'./details.html?id='+ event._id">See more!</a>
-                        </div>
+            <template v-if="!events && !loadError">
+                <div class="cards-container row">
+                    <div class="loader-container">
+                        <img class="loader-img"src="./assets/img/logo.svg" alt="loader"/>
+                        <img class="loader"src="./assets/img/loader.gif" alt="loader"/>    
                     </div>
-                </article>
-            </div>
+                </div>
+            </template>
+            <template v-else-if="loadError">
+                <div lass="cards-container row">
+                    <div class="not-found-container">
+                        <h2 class="not-found">Unexistent event!</h2>
+                        <h3 class="not-found">Try again with another name or category!</h3>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="cards-container row">
+                    <article v-for="event of filteredEvents" class="card col-10 col-md-5 col-lg-3">
+                        <img class="card-img-top" :src="event.image" :alt="event.name">
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.name}}</h5>
+                            <p class="card-text">{{event.description}}</p>
+                            <div class="card_call">
+                                <p><span>Price: $</span> {{event.price}}</p>
+                                <a class="btn btn-see-more" :href="'./details.html?id='+ event._id">See more!</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </template>
         </div>
     </main>
     <footer>
