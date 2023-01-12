@@ -46,7 +46,7 @@ nav ul a{
 nav ul a:hover{
     text-decoration: underline;
 }
-main{
+.main-container{
     display: flex;
     flex-direction: column;
     align-items: center;
