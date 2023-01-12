@@ -74,9 +74,15 @@
             <template v-else-if="loadError">
                 <div lass="cards-container row">
                     <div class="not-found-container">
-                        <h2 class="not-found">Unexistent event!</h2>
-                        <h3 class="not-found">Try again with another name or category!</h3>
+                        <h2 class="not-found">Loading error!</h2>
+                        <h3 class="not-found">Please try again later</h3>
                     </div>
+                </div>
+            </template>
+            <template v-else-if="filteredEvents.length===0">
+                <div class="not-found-container">
+                    <h2 class="not-found">Nonexistent event!</h2>
+                    <h3 class="not-found">Try again with another name or category!</h3>
                 </div>
             </template>
             <template v-else>

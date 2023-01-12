@@ -12,19 +12,10 @@ createApp({
         }
     },
     created(){
-        const title=document.querySelector("h1").innerHTML;
         fetch("https://mindhub-xj03.onrender.com/api/amazing")
         .then(res=>res.json())
         .then(res=>{
-            if (title==="Home"){
-                this.events=res.events;
-            }
-            if (title==="Upcoming Events"){
-                this.events=res.events.filter(event=>event.date>res.currentDate);
-            }
-            if (title==="Past Events"){
-                this.events=res.events.filter(event=>event.date<res.currentDate);
-            }
+            this.CheckActualPage(res);
             this.categories=[... new Set(this.events.map(event=>event.category))]
             this.filteredEvents=this.events;
         })
@@ -33,12 +24,24 @@ createApp({
         })
     },
     methods:{
+        CheckActualPage(data){
+            const title=document.querySelector("h1").innerHTML;
+            if (title==="Home"){
+                this.events=data.events;
+            }
+            if (title==="Upcoming Events"){
+                this.events=data.events.filter(event=>event.date>data.currentDate);
+            }
+            if (title==="Past Events"){
+                this.events=data.events.filter(event=>event.date<data.currentDate);
+            }
+        },
         CrossFilter(){
             console.log("asdasd")
             let searchFilter= this.events.filter(event=> event.name.toLowerCase().includes(this.searchValue.toLowerCase()));
-            console.log(searchFilter)
+            let checkFilter= searchFilter.filter(event=> this.checkedCategories.includes(event.category));
             if(this.checkedCategories.length!==0){
-                this.filteredEvents= searchFilter.filter(event=> this.checkedCategories.includes(event.category));
+                this.filteredEvents= checkFilter;
             }else{
                 this.filteredEvents=searchFilter;
             }
