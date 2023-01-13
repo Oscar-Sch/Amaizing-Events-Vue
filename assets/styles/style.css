@@ -152,6 +152,38 @@ h1{
     max-width: 25rem;
     position: relative;
 }
+.card-modal{
+    max-width: 15rem;
+    text-align: center;
+}
+.clear-favs{
+    background-color: var(--lila);
+    padding: .3em .5em;
+    border-radius: .5em;
+    border: 2px solid var(--violeta);
+    font-family: 'Aclonica', sans-serif;
+    font-size: .8rem !important;
+    font-weight: bolder !important;
+    box-shadow: 2px 2px 2px inset #fffa,-2px -2px 3px inset #4f0087;
+}
+.close-favs{
+    padding: .3em .5em;
+    border-radius: .5em;
+    background-color: lightgray;
+    font-family: 'Aclonica', sans-serif;
+    font-size: .8rem !important;
+    font-weight: bolder !important;
+    box-shadow: 2px 2px 2px inset #fffa,-2px -2px 3px inset #0005;
+    border: 2px solid black;
+}
+.close-favs:hover{
+    background-color: gray;
+    box-shadow: 2px 2px 2px inset #0005,-2px -2px 3px inset #fffa;
+}
+.clear-favs:hover{
+    background-color: var(--violeta);
+    box-shadow: 2px 2px 2px inset #4f0087,-2px -2px 3px inset #fffa;
+}
 .fav-container{
     width: 2.2em;
     height: 2.2em;
@@ -185,6 +217,9 @@ h1{
     z-index: 2;
     background-color: var(--violeta);
     color: white;
+}
+.open-fav:hover{
+    background-color: var(--lila);
 }
 .card:hover{
     box-shadow: 5px 5px 15px black;

@@ -51,6 +51,43 @@
             <img class="logo" src="./assets/img/logo.svg" alt="logo">
         </div>
         <div id="app" class="main-container">
+            <button v-if="favList.length!==0" type="button" class="btn open-fav" data-bs-toggle="modal" data-bs-target="#modalId">
+            Favs
+            </button>
+            <button v-else disabled type="button" class="btn open-fav" data-bs-toggle="modal" data-bs-target="#modalId">
+                Favs
+            </button>
+            
+            <!-- Modal Body -->
+            <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitleId">Favorites</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex justify-content-center">
+                            <div class="cards-container row">
+                                <article v-for="event of favList" class="card col-10 col-md-5 col-lg-3 card-modal">
+                                    <img class="card-img-top" :src="event.image" :alt="event.name">
+                                    <div :class="FavButton(event)" @click="HandleFav(event)">
+                                        <img src="./assets/img/icon-fav2.svg" alt="fav-icon">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{event.name}}</h5>
+                                            <p><span>Price: $</span> {{event.price}}</p>
+                                            <a class="btn btn-see-more" :href="'./details.html?id='+ event._id">See more!</a>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn close-favs" data-bs-dismiss="modal">Close</button>
+                            <button @click="ClearFavs()"type="button" class="btn clear-favs">Clear list</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="filter-container">
                 <div class="btn-group d-flex flex-wrap justify-content-evenly" role="group" aria-label="Basic checkbox toggle button group">
                 <template v-if="categories" v-for="category of categories">
@@ -89,6 +126,9 @@
                 <div class="cards-container row">
                     <article v-for="event of filteredEvents" class="card col-10 col-md-5 col-lg-3">
                         <img class="card-img-top" :src="event.image" :alt="event.name">
+                        <div :class="FavButton(event)" @click="HandleFav(event)">
+                            <img src="./assets/img/icon-fav2.svg" alt="fav-icon">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">{{event.name}}</h5>
                             <p class="card-text">{{event.description}}</p>

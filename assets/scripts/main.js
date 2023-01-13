@@ -65,6 +65,10 @@ createApp({
                 return 'fav-container saved'
             }
             return 'fav-container'
+        },
+        ClearFavs(){
+            this.favList=[];
+            localStorage.setItem("Favorites", JSON.stringify(this.favList))
         }
     }
 }).mount('#app')
